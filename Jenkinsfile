@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        registry = '54.235.201.140:8085/chatapp'
+        registry = '44.209.130.198:8085/chatapp'
         registryCredentails = 'nexus-cred'
         dockerImage = ''
     }
@@ -14,7 +14,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Get some code from a GitHub repository
-                git credentialsId: 'git-token-2', url: 'git@github.com:gopal1409/ibmchatapp.git'
+                git credentialsId: 'git-token', url: 'git@github.com:bharatbalothia/jenkins.git'
 
                 // Run Maven on a Unix agent.
                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
@@ -42,7 +42,7 @@ pipeline {
         stage('push image') {
             steps {
                 script {
-                    withDockerRegistry(credentialsId: 'nexus-cred', url: 'http://54.235.201.140:8085') {
+                    withDockerRegistry(credentialsId: 'nexus-cred', url: 'http://44.209.130.198:8085') {
                         dockerImage.push()
                        }
                 }
