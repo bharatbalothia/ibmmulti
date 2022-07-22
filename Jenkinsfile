@@ -10,7 +10,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Get some code from a GitHub repository
-                git credentialsId: 'git-token-2', url: 'git@github.com:gopal1409/ibmchatapp.git'
+                git credentialsId: 'git-token', url: 'git@github.com:bharatbalothia/jenkins.git'
 
                 // Run Maven on a Unix agent.
                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
@@ -30,7 +30,7 @@ pipeline {
         }
         stage('ansible') {
             steps {
-                git 'https://github.com/gopal1409/ibmjulytomcat.git'
+                git 'https://github.com/bharatbalothia/ibmjulytomcat.git'
                 ansiblePlaybook credentialsId: 'ansible-id', disableHostKeyChecking: true, inventory: 'dev.inv', playbook: 'tomcat.yml'
             }
         }
