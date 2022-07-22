@@ -10,7 +10,7 @@ pipeline {
         stage('Code from SCM') {
             steps {
                 // Get some code from a GitHub repository
-                git credentialsId: 'git-token-2', url: 'git@github.com:gopal1409/ibmchatapp.git'
+                git credentialsId: 'git-token', url: 'git@github.com:bharatbalothia/jenkins.git'
 
             }
         }
@@ -47,7 +47,7 @@ pipeline {
           nexusArtifactUploader(
           nexusVersion: 'nexus3',
           protocol: 'http',
-          nexusUrl: '54.235.201.140:8081',
+          nexusUrl: '44.209.130.198:8081',
           groupId: 'websocket-demo',
           version: '0.0.1-SNAPSHOT',
           repository: 'maven-snapshots',
@@ -62,15 +62,15 @@ pipeline {
           }
         }
 
-        stage('sonar testing') {
-            when {
-                expression {choice  == 3}
-            }
-            steps {
+        //stage('sonar testing') {
+          //  when {
+            //    expression {choice  == 3}
+            //}
+            //steps {
                 // Get some code from a GitHub repository
-                sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=chatapp -Dsonar.host.url=http://54.235.201.140:9000 -Dsonar.login=sqp_5a025935312a61ce25f0280e6ff44fe4222fa29b'
+             //   sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=chatapp -Dsonar.host.url=http://44.209.130.198:9000 -Dsonar.login=sqp_5a025935312a61ce25f0280e6ff44fe4222fa29b'
 
-            }
-        }
+            //}
+        //}
     }
 }
